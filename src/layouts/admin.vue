@@ -30,7 +30,7 @@
         </v-container>
       </v-content>
       <v-footer color="light-blue darken-3" app>
-        <span class="white--text">&copy; {{ new Date().getFullYear() }} Xtravelous</span>
+        <span class="white--text">&copy; {{ new Date().getFullYear() }} xTravelous</span>
       </v-footer>
     </v-app>
   </template>
@@ -44,11 +44,11 @@
       },
       data() {
         return {
-          drawer: true,
+          drawer: false,
           items: [{
               title: 'Subscribers',
               icon: 'ic_people',
-              url: 'Admin'
+              url: 'Subscribers'
             }
           ],
           mini: false,
@@ -58,7 +58,7 @@
       methods: {
         logout() {
           localStorage.removeItem('xtravelous_admin')
-          setTimeout(() => location.href = '/', 500)
+          setTimeout(() => location.href = '#/', 500)
         }
       }
     }

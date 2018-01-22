@@ -30,7 +30,7 @@
     created() {
       const adminStorage = localStorage.getItem('xtravelous_admin')
       if (JSON.parse(adminStorage).username === '@dm1n' && JSON.parse(adminStorage).password === 'xtr@vel0us') {
-        location.href = '#/subscribers'
+        location.href = '#/main'
       }
     },
     methods: {
@@ -40,7 +40,7 @@
             username: this.username,
             password: this.password
           }))
-          location.href = "#/subscribers"
+          location.href = "#/main"
         } else {
           alert('Invalid credentials.')
         }

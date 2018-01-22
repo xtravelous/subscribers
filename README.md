@@ -2,7 +2,7 @@
 
 > travel matching and booking application
 
-[View Demo](http://xtravelous.robertsoriano.com/)
+[View Website](http://subscribers.xtravelous.com/)
 
 ## Build Setup
 

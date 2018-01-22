@@ -16,13 +16,28 @@ export default function JSONToCSVConverter(JSONData, ReportTitle, ShowLabel) {
     for (var index in arrData[0]) {
 
       //Now convert each value to string and comma-seprated
-      row += index + ',';
+      const newLabel = () => {
+        let l = ''
+        if(index === 'created_at') {
+          l = 'Subscribe Date'
+        }
+        else if(index === 'fullName') {
+          l = 'Full name'
+        }
+        else if(index === 'email') {
+          l = 'Email address'
+        }
+        return l
+      }
+      row += newLabel() + ',';
+      console.log(row)
     }
 
     row = row.slice(0, -1);
 
     //append Label row with line break
     CSV += row + '\r\n';
+    console.log(CSV)
   }
 
   //1st loop is to extract each row
@@ -33,7 +48,7 @@ export default function JSONToCSVConverter(JSONData, ReportTitle, ShowLabel) {
     for (var index in arrData[i]) {
       const data = (typeof arrData[i][index] === 'number') ? moment(arrData[i][index]).format('L LT') : arrData[i][index]
       row += '"' + data + '",';
-      console.log(typeof (arrData[i][index]))
+      //console.log(typeof (arrData[i][index]))
     }
 
     row.slice(0, row.length - 1);

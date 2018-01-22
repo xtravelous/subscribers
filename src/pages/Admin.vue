@@ -34,10 +34,10 @@
       this.fetchUsers()
       const adminStorage = localStorage.getItem('xtravelous_admin')
       if(!adminStorage) {
-        location.href = '/'
+        location.href = '#/'
       } else {
         if(JSON.parse(adminStorage).username === 'x' || JSON.parse(adminStorage).password === 'x') {
-          location.href = '/'
+          location.href = '#/'
         }
       }
     },
@@ -72,7 +72,13 @@
         users.onSnapshot(snapshot => {
           snapshot.docChanges.forEach(change => {
             if (change.type === 'added') {
-              this.subscribers.push(change.doc.data())
+              const docData = change.doc.data()
+              const subscriber = {
+                created_at: docData.created_at,
+                fullName: docData.fullName,
+                email: docData.email.toLowerCase()
+              }
+              this.subscribers.push(subscriber)
             }
           })
           this.loading = false
@@ -87,7 +93,7 @@
           delete s.message
           return s
         })
-        JSONToCSVConverter(subscribers, 'Subscribers', true)
+        JSONToCSVConverter(subscribers, `Subscribers as of ${moment(Date.now()).format('L')}`, true)
       }
     },
     filters: {
