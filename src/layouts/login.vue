@@ -14,6 +14,10 @@
 
 <script>
     export default {
-        name: 'login'
+        name: 'login',
+        created() {
+          const url = window.location.href
+          if(url.includes('http://')) location.href = 'https://subscribers.xtravelous.com'
+        }
     }
 </script>

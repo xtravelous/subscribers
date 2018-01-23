@@ -29,8 +29,10 @@
     },
     created() {
       const adminStorage = localStorage.getItem('xtravelous_admin')
-      if (JSON.parse(adminStorage).username === '@dm1n' && JSON.parse(adminStorage).password === 'xtr@vel0us') {
-        location.href = '#/main'
+      if (adminStorage !== null) {
+        if (JSON.parse(adminStorage).username === '@dm1n' && JSON.parse(adminStorage).password === 'xtr@vel0us') {
+          location.href = '#/main'
+        }
       }
     },
     methods: {

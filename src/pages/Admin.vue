@@ -16,7 +16,8 @@
         </template>
         <template slot="footer">
           <td colspan="100%" class="text-xs-center">
-            <v-btn @click.native="download" flat color="green darken-1"><v-icon left>file_download</v-icon> Download as spreadsheet</v-btn>
+            <v-btn @click.native="download" flat color="green darken-1">
+              <v-icon left>file_download</v-icon> Download as spreadsheet</v-btn>
           </td>
         </template>
       </v-data-table>
@@ -33,10 +34,10 @@
     created() {
       this.fetchUsers()
       const adminStorage = localStorage.getItem('xtravelous_admin')
-      if(!adminStorage) {
+      if (!adminStorage) {
         location.href = '#/'
       } else {
-        if(JSON.parse(adminStorage).username === 'x' || JSON.parse(adminStorage).password === 'x') {
+        if (JSON.parse(adminStorage).username === 'x' || JSON.parse(adminStorage).password === 'x') {
           location.href = '#/'
         }
       }
@@ -71,15 +72,7 @@
         this.loading = true
         users.onSnapshot(snapshot => {
           snapshot.docChanges.forEach(change => {
-            if (change.type === 'added') {
-              const docData = change.doc.data()
-              const subscriber = {
-                created_at: docData.created_at,
-                fullName: docData.fullName,
-                email: docData.email.toLowerCase()
-              }
-              this.subscribers.push(subscriber)
-            }
+            if (change.type === 'added') this.subscribers.push(change.doc.data())
           })
           this.loading = false
         })
@@ -89,10 +82,7 @@
         this.dialog = true
       },
       download() {
-        let subscribers = this.subscribers.map(s => {
-          delete s.message
-          return s
-        })
+        let subscribers = this.subscribers.map(s => s)
         JSONToCSVConverter(subscribers, `Subscribers as of ${moment(Date.now()).format('L')}`, true)
       }
     },
